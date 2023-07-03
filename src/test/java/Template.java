@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -64,7 +65,7 @@ public class Template {
     }
 
     @Test
-    public void checkBoxes() throws InterruptedException {
+    public void checkBoxes() throws InterruptedException { //veikia, failure seats result, nes ne 1, 3
         driver.get("http://127.0.0.1:5500/index.html");
         driver.findElement(By.id("sleepInBed")).click(); // kur miegosim varnele
         driver.findElement(By.id("HaveMeal")).click();//ar valgysim varnele
@@ -95,20 +96,25 @@ public class Template {
 
     }
 
-    @Ignore
     @Test
-    public void parkingAnswer() throws InterruptedException {
+    public void timeCheck() throws InterruptedException {
+        driver.get("http://127.0.0.1:5500/index.html");
+        driver.findElement(By.xpath("//*[@id=\"time\"]")).sendKeys("0940AM");
+        driver.findElement(By.name("date")).sendKeys("10/15/2023"); //veikia
+        driver.findElement(By.name("datetime-local")).sendKeys("07/01/2023");
+        driver.findElement(By.name("datetime-local")).sendKeys(Keys.TAB);
+        Thread.sleep(100);
+        driver.findElement(By.name("datetime-local")).sendKeys("15:15PM");
+        driver.findElement(By.name("month")).sendKeys("July"); //neparenka metu, tik menesi
+        driver.findElement(By.name("month")).sendKeys(Keys.TAB);
+        driver.findElement(By.name("month")).sendKeys("2025");
+        Thread.sleep(100);
+        driver.findElement(By.name("week")).sendKeys("Week51,2023");
+        driver.findElement(By.xpath("//*[@id=\"form\"]/button")).click();//push touch me
 
 
     }
-    // if(text.equals("jonas")){
-// System.out.println("zodis buvo jonas");
-// } else if (text.equals("labas")) {
-// System.out.println("zodis buvo labas");
-// }else {
-// System.out.println("zodis mums nezinomas");
 
-    // Assert.assertEquals(driver.findElement(By.id("name-result")).getText(),"Vardenis");
 
     // @BeforeMethod
     //  public void beforeMethod() {
