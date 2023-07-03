@@ -97,6 +97,24 @@ public class Template {
     }
 
     @Test
+    public void radioButtonCheck() {
+        driver.get("http://127.0.0.1:5500/index.html");
+        driver.findElement(By.id("start")).click();
+        driver.findElement(By.id("mid")).click();
+        driver.findElement(By.id("end")).click();
+        driver.findElement(By.xpath("//*[@id=\"form\"]/button")).click();//push touch me
+
+        Assert.assertEquals(driver.findElement(By.id("start")).isSelected(), false);
+        Assert.assertEquals(driver.findElement(By.id("mid")).isSelected(), false);
+        Assert.assertEquals(driver.findElement(By.id("end")).isSelected(), true);//option 3 chosen?
+
+        Assert.assertEquals(driver.findElement(By.id("parking-result-start")).getText(), "No");
+        Assert.assertEquals(driver.findElement(By.id("parking-result-mid")).getText(), "No");
+        Assert.assertEquals(driver.findElement(By.id("parking-result-end")).getText(), "Yes");
+
+    }
+
+    @Test
     public void timeCheck() throws InterruptedException {
         driver.get("http://127.0.0.1:5500/index.html");
         driver.findElement(By.xpath("//*[@id=\"time\"]")).sendKeys("0940AM");
