@@ -17,7 +17,7 @@ public class Template {
     public void FillSearch() throws InterruptedException {
         driver.get("http://127.0.0.1:5500/index.html");
         driver.findElement(By.id("reset")).click(); // reset button
-        driver.findElement(By.id("search")).sendKeys("Plaukimas baidaremis");
+        driver.findElement(By.id("search")).sendKeys("Plaukimas baidaremis");//patikrinti ar gautas tekstas=tekstas
         driver.findElement(By.xpath("//*[@id=\"form\"]/button")).click();
         String searchResult = driver.findElement(By.id("search-result")).getText();
         System.out.println(searchResult.equals("Plaukimas baidaremis") ? "search pass" : "search fail");
@@ -130,9 +130,28 @@ public class Template {
         driver.findElement(By.name("week")).sendKeys("Week51,2023");
         driver.findElement(By.xpath("//*[@id=\"form\"]/button")).click();//push touch me
 
+        //***checkTimeInfo***///
+        Assert.assertEquals(driver.findElement(By.id("time-result")).getText(), "09:40");
+        String timeResultCheck = driver.findElement(By.id("time-result")).getText();// check time result
+        System.out.println(timeResultCheck.equals("09:40") ? "timeResult correct" : "timeResult incorrect");
+
+        Assert.assertEquals(driver.findElement(By.id("date-result")).getText(), "2023-10-15");
+        String dateResultCheck = driver.findElement(By.id("date-result")).getText();
+        System.out.println(dateResultCheck.equals("2023-10-15") ? "dateResult correct" : "dateResult incorrect");
+
+        Assert.assertEquals(driver.findElement(By.id("datetime-local-result")).getText(), "2023-07-01T15:15");
+        String dateTimeLocalResultCheck = driver.findElement(By.id("datetime-local-result")).getText();
+        System.out.println(dateTimeLocalResultCheck.equals("2023-07-01T15:15") ? "datetimeResult correct" : "datetimeResult incorrect");
+
+        Assert.assertEquals(driver.findElement(By.id("month-result")).getText(), "2025-07");
+        String monthResultCheck = driver.findElement(By.id("month-result")).getText();
+        System.out.println(monthResultCheck.equals("2025-07") ? "monthResult correct" : "monthResult incorrect");
+
+        Assert.assertEquals(driver.findElement(By.id("week-result")).getText(), "2023-W51");
+        String weekResultCheck = driver.findElement(By.id("week-result")).getText();
+        System.out.println(weekResultCheck.equals("2023-W51") ? "weekResult correct" : "weekResult incorrect");
 
     }
-
 
     // @BeforeMethod
     //  public void beforeMethod() {
